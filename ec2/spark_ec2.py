@@ -609,7 +609,7 @@ def ssh(host, opts, command):
       return subprocess.check_call(
         ssh_command(opts) + ['-t', '-t', '%s@%s' % (opts.user, host), stringify_command(command)])
     except subprocess.CalledProcessError as e:
-      if (tries > 2):
+      if (tries > 5):
         # If this was an ssh failure, provide the user with hints.
         if e.returncode == 255:
           raise UsageError("Failed to SSH to remote host {0}.\nPlease check that you have provided the correct --identity-file and --key-pair parameters and try again.".format(host))
